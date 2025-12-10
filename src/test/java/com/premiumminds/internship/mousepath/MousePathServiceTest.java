@@ -28,7 +28,60 @@ public class MousePathServiceTest {
       ;
       assertTrue(new MousePathService().isValidGrid(grid));
   }
+  @Test
+  void easy() {
+    final char[][] grid = this.convert(new String[] {
+      "  ",
+      "XX",
+      "  ",
+      });
+      ;
+      assertTrue(new MousePathService().isValidGrid(grid));
+  }
 
+  @Test
+  void easyfalse() {
+    final char[][] grid = this.convert(new String[] {
+      "X  ",
+      "|  ",
+      "+-X",
+      "|  "});
+      ;
+      assertFalse(new MousePathService().isValidGrid(grid));
+  }
+
+  @Test
+  void breakNoFinishLab() {
+    char[][] map = {
+    {'X', '-', '-', '+', ' ', ' ', ' ', ' ', '+', '-', '-', '-', '+'},
+    {' ', ' ', ' ', '|', '-', '-', '-', '-', '+', ' ', ' ', '+', '+'},
+    {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '+', 'X'}
+};
+
+      assertFalse(new MousePathService().isValidGrid(map));
+  }
+  @Test
+  void loopPath() {
+    final char[][] grid = this.convert(new String[] {
+      "X-+ ",
+      "  | ",
+      "++++",
+      "|+-+",
+      "+--X"
+    });
+    assertTrue(new MousePathService().isValidGrid(grid));
+  }
+  @Test
+  void Corner() {
+    final char[][] grid = this.convert(new String[] {
+      "           ",
+      "X----+X",
+      "           ",
+      "           "
+      });
+      ;
+      assertFalse(new MousePathService().isValidGrid(grid));
+  }
   @Test
   void PersonOneChildTest() {
     final char[][] grid = this.convert(new String[] {
@@ -36,6 +89,48 @@ public class MousePathServiceTest {
       " |  ",
       " +  ",
       " X  "
+      });
+      assertFalse(new MousePathService().isValidGrid(grid));
+  }
+
+  @Test
+  void DownUp() {
+    final char[][] grid = this.convert(new String[] {
+      " X X",
+      " | |",
+      " | |",
+      " +-+"
+      });
+      assertTrue(new MousePathService().isValidGrid(grid));
+  }
+  @Test
+  void ConnectedDownUp() {
+    final char[][] grid = this.convert(new String[] {
+      " X-X",
+      " | |",
+      " | |",
+      " +-+"
+      });
+      assertFalse(new MousePathService().isValidGrid(grid));
+  }
+  @Test
+  void ZigZag() {
+    final char[][] grid = this.convert(new String[] {
+      "XX ",
+      "|| ",
+      "|++",
+      "+-+"
+      });
+      assertTrue(new MousePathService().isValidGrid(grid));
+  }
+  @Test
+  void ZigZagW() {
+    final char[][] grid = this.convert(new String[] {
+      "XX ",
+      "|| ",
+      "|++",
+      "+-+",
+      "+-+"
       });
       assertFalse(new MousePathService().isValidGrid(grid));
   }
